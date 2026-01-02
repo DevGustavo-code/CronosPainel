@@ -1,0 +1,318 @@
+ /* =========================================================
+   Cronos Painel — Index / Auth CSS
+   Autor: Gustavo
+   Descrição: Estilos das telas de Login, Registro e Recover
+   ========================================================= */
+
+/* =========================================================
+   SUMMARY / SUMÁRIO
+   ---------------------------------------------------------
+   1. Theme (Variáveis e temas)
+   2. Reset & Body
+   3. Login Container
+   4. Typography
+   5. Inputs & Forms
+   6. Buttons
+   7. Footer Links
+   8. Dashboard Base (reaproveitado)
+   9. User Menu & Logout
+   10. Modal System
+   ========================================================= */
+
+
+/* =========================================================
+   1. THEME
+   ---------------------------------------------------------
+   - Variáveis globais
+   - Dark Theme (default)
+   - Light Theme
+   ========================================================= */
+
+:root {
+    --bg-body: #0f0f13;
+    --bg-card: #1a1a21;
+    --text-main: #ffffff;
+    --text-sub: #888;
+    --primary: #00d4ff;
+    --border: #333;
+}
+
+/* Classe aplicada via JavaScript */
+.light-theme {
+    --bg-body: #f4f4f9;
+    --bg-card: #ffffff;
+    --text-main: #1a1a21;
+    --text-sub: #666;
+    --primary: #007bff;
+    --border: #ddd;
+}
+
+
+/* =========================================================
+   2. RESET & BODY
+   ---------------------------------------------------------
+   - Reset global
+   - Layout centralizado
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background 0.3s, color 0.3s;
+}
+
+
+/* =========================================================
+   3. LOGIN CONTAINER
+   ---------------------------------------------------------
+   - Card principal de autenticação
+   ========================================================= */
+
+.login-container {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+
+/* =========================================================
+   4. TYPOGRAPHY
+   ---------------------------------------------------------
+   - Títulos e textos
+   ========================================================= */
+
+h2 {
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+h2 span {
+    color: var(--primary);
+}
+
+p {
+    color: var(--text-sub);
+    font-size: 0.9em;
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   5. INPUTS & FORMS
+   ---------------------------------------------------------
+   - Inputs animados
+   ========================================================= */
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    outline: none;
+    color: var(--text-main);
+    transition: 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--text-sub);
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -15px;
+    font-size: 0.8em;
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   6. BUTTONS
+   ---------------------------------------------------------
+   - Botões de ação
+   ========================================================= */
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: var(--primary);
+    color: var(--bg-body);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+
+/* =========================================================
+   7. FOOTER LINKS
+   ---------------------------------------------------------
+   - Links auxiliares
+   ========================================================= */
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links p {
+    color: var(--text-sub);
+}
+
+.footer-links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+#regMessage {
+    margin-top: 15px;
+    font-size: 0.85em;
+}
+
+
+/* =========================================================
+   8. DASHBOARD BASE (REAPROVEITADO)
+   ---------------------------------------------------------
+   - Estrutura básica compartilhada
+   ========================================================= */
+
+.dashboard-wrapper {
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+header {
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   9. USER MENU & LOGOUT
+   ---------------------------------------------------------
+   - Menu superior e botão sair
+   ========================================================= */
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-link {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: #ff4d4d;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-link:hover {
+    background: #ff4d4d;
+    color: white;
+}
+
+
+/* =========================================================
+   10. MODAL SYSTEM
+   ---------------------------------------------------------
+   - Modais reutilizáveis
+   ========================================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 400px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dark-input,
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    background: #25252e;
+    color: white;
+    border: 1px solid #444;
+    margin-top: 10px;
+    border-radius: 4px;
+}

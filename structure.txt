@@ -1,0 +1,148 @@
+📌 Projeto Cronos Painel — Documentação Técnica
+
+Este documento descreve a estrutura interna, responsabilidades de cada pasta e o funcionamento geral do projeto Cronos Painel.
+É voltado para desenvolvedores, com o objetivo de facilitar:
+-manutenção
+-depuração de erros
+-entendimento do fluxo da aplicação
+-reutilização do projeto como base
+
+📁 Estrutura de Pastas
+CronosPainel/
+├── assets/
+│   ├── css/
+│   │   ├── dashboard.css
+│   │   └── index.css
+│   │
+│   ├── img/
+│   │   └── image.png
+│   │
+│   └── js/
+│       └── dashboard.js
+│
+├── config/
+│   └── db.php
+│
+├── controllers/
+│   └── auth.php
+│
+├── database/
+│   └── schema.sql
+│
+├── public/
+│   ├── dashboard.php
+│   ├── index.php
+│   ├── logout.php
+│   ├── recover.php
+│   ├── register.php
+│   └── reset.php
+│
+├── README.md
+└── structure.txt
+
+📂 Descrição das Pastas e Arquivos
+🔹 assets/
+-Contém todos os arquivos estáticos do projeto.
+
+assets/css/
+
+-Arquivos de estilização:
+--index.css → tela de login, cadastro e recuperação de senha
+--dashboard.css → layout principal da dashboard, cards, gráficos, modais e temas
+
+⚠️ Problemas visuais ou de tema geralmente estão relacionados a essa pasta.
+
+assets/js/
+
+-Arquivos JavaScript responsáveis por interações do usuário:
+--controle de modais (abrir / fechar)
+--alternância de tema (dark/light)
+--persistência de tema via cookie
+--ajustes visuais do gráfico (Chart.js)
+
+📌 Arquivo principal:
+dashboard.js
+
+assets/img/
+-Imagens utilizadas no projeto (ex: preview, logos, banners).
+
+🔹 config/
+
+-Responsável pela configuração do banco de dados.
+-> arquivo = db.php
+-Cria a conexão PDO com o MySQL
+-Centraliza as credenciais do banco
+-Deve ser incluído em todos os arquivos que acessam o banco
+
+📌 Qualquer erro de conexão começa aqui.
+
+🔹 controllers/
+-Camada de lógica e regras de negócio.
+-> arquivo = auth.php
+-Responsável por:
+-autenticação de usuários
+-validação de login
+-criptografia de senhas (password_hash)
+-verificação de credenciais (password_verify)
+
+📌 Ideal para manter o código mais organizado e reutilizável.
+
+🔹 database/
+-Arquivos relacionados ao banco de dados.
+-> arquivo = schema.sql
+-Estrutura completa do banco
+-Criação de tabelas (users, study_logs, goals, plans, password_resets)
+-Deve ser importado no MySQL antes de rodar o projeto
+
+📌 Erro comum: esquecer de importar este arquivo.
+
+🔹 public/
+
+-Camada pública da aplicação (rotas acessíveis pelo navegador).
+Arquivos principais:
+
+-> arquivo =index.php
+-Tela de login
+
+-> arquivo = register.php
+-Cadastro de novos usuários
+
+-> arquivo = dashboard.php
+-Painel principal:
+--gráficos de estudo
+--metas
+--planejamento
+--modais
+--controle de sessão
+
+-> arquivo = recover.php
+--Solicitação de recuperação de senha (gera token)
+
+-> arquivo = reset.php
+--Redefinição de senha via token
+
+-> arquivo = logout.php
+Finaliza a sessão do usuário
+
+📌 Todos os arquivos aqui dependem de sessão ativa ($_SESSION).
+
+🔄 Fluxo Geral da Aplicação
+-Usuário acessa index.php
+--Login é validado via auth.php
+---Sessão é criada
+----Usuário é redirecionado para dashboard.php
+
+A dashboard:
+-lê dados do banco
+--aplica filtros (semana / mês / ano)
+---renderiza gráficos
+----Metas e planos são persistidos no banco
+---Tema visual é salvo via cookie
+--Logout encerra a sessão
+
+🛠️ Dicas para Debug e Manutenção
+-Erros SQL → verifique schema.sql
+--Tema não persiste → verifique cookies e dashboard.js
+---Sessão expira → revisar session_start() e logout.php
+--Recuperação de senha falha → conferir tabela password_resets
+-Gráfico vazio → verificar filtros de data no dashboard.php
